@@ -21,30 +21,30 @@ BEGIN
 		VALUES (airline_code, airline_name);
 END $$
 -- ORAN CAN END
+--bngszcn
+CREATE PROCEDURE addNewFlight( flightNumber CHAR(7), planeModel CHAR(20), tailNumber CHAR(6), gate_park CHAR(5), 
+departureTime TIMESTAMP, is_domestic BOOLEAN, flightDestination CHAR(3), flightDeparture CHAR(3), flightRunway CHAR(5), 
+airlineCode CHAR(4))
 
--- berkyaglioglu start
-CREATE PROCEDURE addHourlyEmployee(`since` DATE, `airline_code` CHAR(4), `ssn` INTEGER, `name` CHAR(20), `service_type` CHAR(20), `hourly_wages` INTEGER, `hours_worked` INTEGER)
 BEGIN
-	INSERT INTO `works_in`(`since`, `airline_code`, `ssn`)
-	VALUES (since, airline_code, ssn);
-	INSERT INTO `employees`(`ssn`, `name`, `service_type`)
-	VALUES (ssn, name, service_type);
-	INSERT INTO `hourly`(`hourly_wages`, `hours_worked`, `employee_ssn`)
-	VALUES (hourly_wages, hours_worked, ssn);
+     INSERT INTO `flights` (`flight_number`,`plane_model`,`tail_number`, `gate/park`,`departure_time`,`isDomestic`, `destination`,`departure`,`runway`)
+	 
+     VALUES (flightNumber, planeModel, tailNumber, gate_park, departureTime, is_domestic, flightDestination, flightDeparture, flightRunway)	;
+     
+	 INSERT INTO `belongs` (`airline_code`, `flight_number`)
+
+	 VALUES (airlineCode, flightNumber);
+	 
 END $$
 
-CREATE PROCEDURE addContractedEmployee(`since` DATE, `airline_code` CHAR(4), `ssn` INTEGER, `name` CHAR(20), `service_type` CHAR(20), `contract_ID` INTEGER)
+
+CREATE PROCEDURE cancelFlight(num CHAR(7), cancel BOOLEAN)
 BEGIN
-	INSERT INTO `works_in`(`since`, `airline_code`, `ssn`)
-	VALUES (since, airline_code, ssn);
-	INSERT INTO `employees`(`ssn`, `name`, `service_type`)
-	VALUES (ssn, name, service_type);
-	INSERT INTO `contracted`(`contract_ID`, `employee_ssn`)
-	VALUES (contract_ID, ssn);
+        UPDATE `flights` SET `is_canceled` = cancel WHERE `flight_number` = num;
 END $$
 
-CREATE PROCEDURE removingEmployee(`ssn` INTEGER)
+CREATE PROCEDURE changePlaneModel(num CHAR(7), planeModel CHAR(20))
 BEGIN
-	DELETE FROM `employees` WHERE `ssn` = ssn;
+        UPDATE `flights` SET `plane_model` = planeModel WHERE `flight_number` = num;
 END $$
--- berkyaglioglu end
+--bngszcn
