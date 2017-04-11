@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS `passengers` (
 CREATE TABLE IF NOT EXISTS `belongs` (
 	`airline_code` CHAR(4),
 	`flight_number` CHAR(7),
-	FOREIGN KEY (`airline_code`) REFERENCES `airlines`(`airline_code`),
-	FOREIGN KEY (`flight_number`) REFERENCES `flights`(`flight_number`),
+	FOREIGN KEY (`airline_code`) REFERENCES `airlines`(`airline_code`) ON DELETE NO ACTION,
+	FOREIGN KEY (`flight_number`) REFERENCES `flights`(`flight_number`) ON DELETE NO ACTION,
 	PRIMARY KEY (`airline_code`, `flight_number`)
 );
 
@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS `works_in` (
 	`since` DATE,
 	`airline_code` CHAR(4),
 	`ssn` INTEGER,
-	FOREIGN KEY (`airline_code`) REFERENCES `airlines`(`airline_code`),
-	FOREIGN KEY (`ssn`) REFERENCES `employees`(`ssn`),
+	FOREIGN KEY (`airline_code`) REFERENCES `airlines`(`airline_code`) ON DELETE NO ACTION,
+	FOREIGN KEY (`ssn`) REFERENCES `employees`(`ssn`) ON DELETE CASCADE,
 	PRIMARY KEY (`ssn`, `airline_code`)
 );
 
@@ -67,8 +67,8 @@ CREATE TABLE IF NOT EXISTS `flies` (
 	`cost` INTEGER,
 	`customer_no` VARCHAR(11),
 	`flight_number` CHAR(7),
-	FOREIGN KEY (`flight_number`) REFERENCES flights(`flight_number`),
-	FOREIGN KEY (`customer_no`) REFERENCES `passengers`(`customer_no`),
+	FOREIGN KEY (`flight_number`) REFERENCES flights(`flight_number`) ON DELETE NO ACTION,
+	FOREIGN KEY (`customer_no`) REFERENCES `passengers`(`customer_no`) ON DELETE CASCADE,
 	PRIMARY KEY (`flight_number`, `customer_no`)
 );
 
@@ -77,9 +77,9 @@ CREATE TABLE IF NOT EXISTS `flies` (
 --
 
 CREATE TABLE IF NOT EXISTS `contracted` (
-	`contract_ID` INTEGER, 
+	`contract_ID` INTEGER,
 	`employee_ssn` INTEGER,
-	FOREIGN KEY (`employee_ssn`) REFERENCES `employees`(`ssn`),
+	FOREIGN KEY (`employee_ssn`) REFERENCES `employees`(`ssn`) ON DELETE CASCADE,
 	PRIMARY KEY (`employee_ssn`)
 );
 
@@ -87,19 +87,19 @@ CREATE TABLE IF NOT EXISTS `hourly` (
 	`hourly_wages` INTEGER,
 	`hours_worked` INTEGER,
 	`employee_ssn` INTEGER,
-	FOREIGN KEY (`employee_ssn`) REFERENCES `employees`(`ssn`),
+	FOREIGN KEY (`employee_ssn`) REFERENCES `employees`(`ssn`) ON DELETE CASCADE,
 	PRIMARY KEY (`employee_ssn`)
 );
 
 CREATE TABLE IF NOT EXISTS `passaport_entry` (
 	`passaport_ID` VARCHAR(11),
 	`country_code` CHAR(2), -- eg. TR, EN...
-	FOREIGN KEY (`passaport_ID`) REFERENCES `passengers`(`customer_no`),
+	FOREIGN KEY (`passaport_ID`) REFERENCES `passengers`(`customer_no`) ON DELETE CASCADE,
 	PRIMARY KEY (`passaport_ID`)
 );
 
 CREATE TABLE IF NOT EXISTS `turkish_entry` (
 	`turkish_ID` VARCHAR(11),
-	FOREIGN KEY (`turkish_ID`) REFERENCES `passengers`(`customer_no`),
+	FOREIGN KEY (`turkish_ID`) REFERENCES `passengers`(`customer_no`) ON DELETE CASCADE,
 	PRIMARY KEY (`turkish_ID`)
 );
