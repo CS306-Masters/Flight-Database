@@ -87,5 +87,7 @@ COMMIT;
 DELETE FROM passengers
 WHERE passengers.customer_no NOT IN (SELECT customer_no FROM flies);
 
+COMMIT;
+
 END $$
 -- Bahadır Yurtkulu End
