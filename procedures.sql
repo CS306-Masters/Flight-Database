@@ -48,3 +48,30 @@ BEGIN
         UPDATE `flights` SET `plane_model` = planeModel WHERE `flight_number` = num;
 END $$
 --bngszcn
+
+-- berkyaglioglu
+CREATE PROCEDURE addHourlyEmployee(`since` DATE, `airline_code` CHAR(4), `ssn` INTEGER, `name` CHAR(20), `service_type` CHAR(20), `hourly_wages` INTEGER, `hours_worked` INTEGER)
+BEGIN
+	INSERT INTO `works_in`(`since`, `airline_code`, `ssn`)
+	VALUES (since, airline_code, ssn);
+	INSERT INTO `employees`(`ssn`, `name`, `service_type`)
+	VALUES (ssn, name, service_type);
+	INSERT INTO `hourly`(`hourly_wages`, `hours_worked`, `employee_ssn`)
+	VALUES (hourly_wages, hours_worked, ssn);
+END $$
+
+CREATE PROCEDURE addContractedEmployee(`since` DATE, `airline_code` CHAR(4), `ssn` INTEGER, `name` CHAR(20), `service_type` CHAR(20), `contract_ID` INTEGER)
+BEGIN
+	INSERT INTO `works_in`(`since`, `airline_code`, `ssn`)
+	VALUES (since, airline_code, ssn);
+	INSERT INTO `employees`(`ssn`, `name`, `service_type`)
+	VALUES (ssn, name, service_type);
+	INSERT INTO `contracted`(`contract_ID`, `employee_ssn`)
+	VALUES (contract_ID, ssn);
+END $$
+
+CREATE PROCEDURE removingEmployee(`ssn` INTEGER)
+BEGIN
+	DELETE FROM `employees` WHERE `ssn` = ssn;
+END $$
+-- berkyaglioglu end
