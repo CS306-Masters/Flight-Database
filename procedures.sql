@@ -130,3 +130,15 @@ SELECT * FROM PFF WHERE PFF.customer_no = cid AND PFF.flight_number = fid;
 
 END $$
 -- Bahadır Yurtkulu End
+
+--Bengusu Oneri: Add new flight'i silelim, yerine şunu koyalım : ssn ini girdiğim employee yi istediğim runway e atamak
+CREATE PROCEDURE updateRunwayforEmployee ( assign_runway CHAR(5), employee_ssn INTEGER)
+BEGIN UPDATE `works_in` SET `ssn`= employee_ssn WHERE `airline_code` = ( SELECT `airline_code`
+                                                                         FROM `airlines`
+								         WHERE `airline_name` = (SELECT `airline_name`
+												 FROM `belongs`
+												WHERE `flight_number` = (SELECT `flight_number`
+															FROM `flights`
+															WHERE `runway` = assign_runway)));																														 
+END$$
+--bitti bengusu. 
