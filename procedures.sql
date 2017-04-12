@@ -2,15 +2,21 @@
 DELIMITER ;
 DELIMITER $$
 
+-- Sorunsuz
+-- Flight number kısmını scroll list şeklinde yapalım.
 CREATE PROCEDURE departureTimeUpdate(t TIMESTAMP, num CHAR(7))
 BEGIN
  	UPDATE `flights` SET `departure_time` = t WHERE `flight_number` = num;
 END $$
 
+-- Eğer kullanıcı kayıtlı olanlardan başka bir flight girerse mesela BY1234 uçuşuna bilet alırsa
+-- Öyle bir uçuş olmadığından hata veriyor.
+-- Belki internet sitesini yaparken scroll list ile yapabiliriz. 
+-- Kullanıcı girmez listeden uçuş seçer.
 CREATE PROCEDURE buyTicket(class CHAR(11), name CHAR(20), customer_no VARCHAR(11), age INT, isFemale BOOLEAN, cost INT, flight_number CHAR(7))
 BEGIN
 	INSERT INTO `passengers`(`class`, `name`, `customer_no`, `age`, `isFemale`)
-		VALUES (class, name, customer_no, age, isFemale, cost);
+		VALUES (class, name, customer_no, age, isFemale);
 	INSERT INTO `flies`(`cost`, `customer_no`, `flight_number`)
 		VALUES (cost, customer_no, flight_number);
 END $$ 
@@ -21,7 +27,7 @@ BEGIN
 		VALUES (airline_code, airline_name);
 END $$
 -- ORAN CAN END
---bngszcn
+-- bngszcn
 CREATE PROCEDURE addNewFlight( flightNumber CHAR(7), planeModel CHAR(20), tailNumber CHAR(6), gate_park CHAR(5), 
 departureTime TIMESTAMP, is_domestic BOOLEAN, flightDestination CHAR(3), flightDeparture CHAR(3), flightRunway CHAR(5), 
 airlineCode CHAR(4))
@@ -47,7 +53,7 @@ CREATE PROCEDURE changePlaneModel(num CHAR(7), planeModel CHAR(20))
 BEGIN
         UPDATE `flights` SET `plane_model` = planeModel WHERE `flight_number` = num;
 END $$
---bngszcn
+-- bngszcn
 
 -- berkyaglioglu
 CREATE PROCEDURE addHourlyEmployee(`since` DATE, `airline_code` CHAR(4), `ssn` INTEGER, `name` CHAR(20), `service_type` CHAR(20), `hourly_wages` INTEGER, `hours_worked` INTEGER)
@@ -70,6 +76,7 @@ BEGIN
 	VALUES (contract_ID, ssn);
 END $$
 
+
 CREATE PROCEDURE removingEmployee(`ssn` INTEGER)
 BEGIN
 	DELETE FROM `employees` WHERE `ssn` = ssn;
@@ -77,6 +84,7 @@ END $$
 -- berkyaglioglu end
 
 -- Bahadır Yurtkulu Begin
+-- sorunsuz
 CREATE PROCEDURE cancelFlightbyPassenger(customerNoEntered VARCHAR(11), flightNumEntered CHAR(7))
 BEGIN
 
