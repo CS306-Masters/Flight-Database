@@ -4,6 +4,8 @@ DELIMITER $$
 
 -- Sorunsuz
 -- Flight number kısmını scroll list şeklinde yapalım.
+DROP PROCEDURE IF EXISTS departureTimeUpdate $$
+
 CREATE PROCEDURE departureTimeUpdate(t TIMESTAMP, num CHAR(7))
 BEGIN
  	UPDATE `flights` SET `departure_time` = t WHERE `flight_number` = num;
@@ -13,6 +15,8 @@ END $$
 -- Öyle bir uçuş olmadığından hata veriyor.
 -- Belki internet sitesini yaparken scroll list ile yapabiliriz. 
 -- Kullanıcı girmez listeden uçuş seçer.
+DROP PROCEDURE IF EXISTS buyTicket $$
+
 CREATE PROCEDURE buyTicket(class CHAR(11), name CHAR(20), customer_no VARCHAR(11), age INT, isFemale BOOLEAN, cost INT, flight_number CHAR(7))
 BEGIN
 	INSERT INTO `passengers`(`class`, `name`, `customer_no`, `age`, `isFemale`)
@@ -21,6 +25,8 @@ BEGIN
 		VALUES (cost, customer_no, flight_number);
 END $$ 
 
+DROP PROCEDURE IF EXISTS newAirline $$
+
 CREATE PROCEDURE newAirline(airline_code CHAR(4), airline_name CHAR(20))
 BEGIN
 	INSERT INTO `airlines`(`airline_code`, `airline_name`)
@@ -28,6 +34,9 @@ BEGIN
 END $$
 -- ORAN CAN END
 -- bngszcn
+
+DROP PROCEDURE IF EXISTS addNewFlight $$
+
 CREATE PROCEDURE addNewFlight( flightNumber CHAR(7), planeModel CHAR(20), tailNumber CHAR(6), gate_park CHAR(5), 
 departureTime TIMESTAMP, is_domestic BOOLEAN, flightDestination CHAR(3), flightDeparture CHAR(3), flightRunway CHAR(5), 
 airlineCode CHAR(4))
@@ -43,18 +52,21 @@ BEGIN
 	 
 END $$
 
+DROP PROCEDURE IF EXISTS cancelFlight $$
 
 CREATE PROCEDURE cancelFlight(num CHAR(7), cancel BOOLEAN)
 BEGIN
         UPDATE `flights` SET `is_canceled` = cancel WHERE `flight_number` = num;
 END $$
 
+DROP PROCEDURE IF EXISTS changePlaneModel $$
+
 CREATE PROCEDURE changePlaneModel(num CHAR(7), planeModel CHAR(20))
 BEGIN
         UPDATE `flights` SET `plane_model` = planeModel WHERE `flight_number` = num;
 END $$
 -- bngszcn
-
+DROP PROCEDURE IF EXISTS addHourlyEmployee $$
 -- berkyaglioglu
 CREATE PROCEDURE addHourlyEmployee(`since` DATE, `airline_code` CHAR(4), `ssn` INTEGER, `name` CHAR(20), `service_type` CHAR(20), `hourly_wages` INTEGER, `hours_worked` INTEGER)
 BEGIN
@@ -66,6 +78,8 @@ BEGIN
 	VALUES (hourly_wages, hours_worked, ssn);
 END $$
 
+DROP PROCEDURE IF EXISTS addContractedEmployee $$
+
 CREATE PROCEDURE addContractedEmployee(`since` DATE, `airline_code` CHAR(4), `ssn` INTEGER, `name` CHAR(20), `service_type` CHAR(20), `contract_ID` INTEGER)
 BEGIN
 	INSERT INTO `works_in`(`since`, `airline_code`, `ssn`)
@@ -76,6 +90,7 @@ BEGIN
 	VALUES (contract_ID, ssn);
 END $$
 
+DROP PROCEDURE IF EXISTS removingEmployee $$
 
 CREATE PROCEDURE removingEmployee(ssn INTEGER)
 BEGIN
@@ -83,6 +98,7 @@ BEGIN
 END $$
 -- berkyaglioglu end
 
+DROP PROCEDURE IF EXISTS cancelFlightbyPassenger $$
 -- Bahadır Yurtkulu Begin
 -- sorunsuz
 CREATE PROCEDURE cancelFlightbyPassenger(customerNoEntered VARCHAR(11), flightNumEntered CHAR(7))
