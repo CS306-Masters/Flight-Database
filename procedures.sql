@@ -77,9 +77,9 @@ BEGIN
 END $$
 
 
-CREATE PROCEDURE removingEmployee(`ssn` INTEGER)
+CREATE PROCEDURE removingEmployee(ssn INTEGER)
 BEGIN
-	DELETE FROM `employees` WHERE `ssn` = ssn;
+	DELETE FROM employees WHERE employees.ssn = ssn;
 END $$
 -- berkyaglioglu end
 
