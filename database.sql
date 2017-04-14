@@ -7,16 +7,16 @@ USE flight_cs306;
 --
 
 CREATE TABLE IF NOT EXISTS `flights` (
-	`flight_number`CHAR(7) NOT NULL,
-	`plane_model` CHAR(20) NOT NULL,
-	`tail_number` CHAR(6) NOT NULL,
-	`gate/park` CHAR(5) NOT NULL,
-	`departure_time` TIMESTAMP NOT NULL,
-	`isDomestic` BOOLEAN NOT NULL,
-	`destination` CHAR(3) NOT NULL,
-	`departure` CHAR(3) NOT NULL,
+	`flight_number`CHAR(7),
+	`plane_model` CHAR(20),
+	`tail_number` CHAR(6),
+	`gate/park` CHAR(5),
+	`departure_time` TIMESTAMP,
+	`isDomestic` BOOLEAN,
+	`destination` CHAR(3),
+	`departure` CHAR(3),
 	`runway` CHAR(5),
-	`is_canceled` BOOLEAN NOT NULL DEFAULT FALSE,
+	`is_canceled` BOOLEAN DEFAULT FALSE,
 	PRIMARY KEY (`flight_number`)
 );
 
@@ -27,16 +27,16 @@ CREATE TABLE IF NOT EXISTS `airlines` (
 );
 
 CREATE TABLE IF NOT EXISTS `employees` (
-	`ssn` INTEGER NOT NULL,
-	`name` CHAR(20) NOT NULL,
+	`ssn` INTEGER,
+	`name` CHAR(20),
 	`service_type` CHAR(20),
 	PRIMARY KEY (`ssn`)
 );
 
 CREATE TABLE IF NOT EXISTS `passengers` (
-	`class` CHAR(11), NOT NULL -- since max length is 11 with "first class"
-	`name` CHAR(20) NOT NULL,
-	`customer_no` VARCHAR(11) NOT NULL,
+	`class` CHAR(11),-- since max length is 11 with "first class"
+	`name` CHAR(20),
+	`customer_no` VARCHAR(11),
 	`age` INTEGER,
 	`isFemale` BOOLEAN,
 	PRIMARY KEY (`customer_no`)
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `passengers` (
 --
 
 CREATE TABLE IF NOT EXISTS `belongs` (
-	`airline_code` CHAR(4) NOT NULL,
-	`flight_number` CHAR(7) NOT NULL,
+	`airline_code` CHAR(4),
+	`flight_number` CHAR(7),
 	FOREIGN KEY (`airline_code`) REFERENCES `airlines`(`airline_code`) ON DELETE NO ACTION,
 	FOREIGN KEY (`flight_number`) REFERENCES `flights`(`flight_number`) ON DELETE NO ACTION,
 	PRIMARY KEY (`airline_code`, `flight_number`)
@@ -56,16 +56,16 @@ CREATE TABLE IF NOT EXISTS `belongs` (
 
 CREATE TABLE IF NOT EXISTS `works_in` (
 	`since` DATE,
-	`airline_code` CHAR(4) NOT NULL,
-	`ssn` INTEGER NOT NULL,
+	`airline_code` CHAR(4),
+	`ssn` INTEGER,
 	FOREIGN KEY (`airline_code`) REFERENCES `airlines`(`airline_code`) ON DELETE NO ACTION,
 	FOREIGN KEY (`ssn`) REFERENCES `employees`(`ssn`) ON DELETE CASCADE,
 	PRIMARY KEY (`ssn`, `airline_code`)
 );
 
 CREATE TABLE IF NOT EXISTS `flies` (
-	`customer_no` VARCHAR(11) NOT NULL,
-	`flight_number` CHAR(7) NOT NULL,
+	`customer_no` VARCHAR(11),
+	`flight_number` CHAR(7),
 	FOREIGN KEY (`flight_number`) REFERENCES flights(`flight_number`) ON DELETE NO ACTION,
 	FOREIGN KEY (`customer_no`) REFERENCES `passengers`(`customer_no`) ON DELETE CASCADE,
 	PRIMARY KEY (`flight_number`, `customer_no`)
@@ -76,29 +76,29 @@ CREATE TABLE IF NOT EXISTS `flies` (
 --
 
 CREATE TABLE IF NOT EXISTS `contracted` (
-	`contract_ID` INTEGER NOT NULL,
-	`employee_ssn` INTEGER NOT NULL,
+	`contract_ID` INTEGER,
+	`employee_ssn` INTEGER,
 	FOREIGN KEY (`employee_ssn`) REFERENCES `employees`(`ssn`) ON DELETE CASCADE,
 	PRIMARY KEY (`employee_ssn`)
 );
 
 CREATE TABLE IF NOT EXISTS `hourly` (
-	`hourly_wages` INTEGER NOT NULL,
-	`hours_worked` INTEGER NOT NULL,
-	`employee_ssn` INTEGER NOT NULL,
+	`hourly_wages` INTEGER,
+	`hours_worked` INTEGER,
+	`employee_ssn` INTEGER,
 	FOREIGN KEY (`employee_ssn`) REFERENCES `employees`(`ssn`) ON DELETE CASCADE,
 	PRIMARY KEY (`employee_ssn`)
 );
 
 CREATE TABLE IF NOT EXISTS `passaport_entry` (
-	`passaport_ID` VARCHAR(11) NOT NULL,
-	`country_code` CHAR(2) NOT NULL, -- eg. TR, EN...
+	`passaport_ID` VARCHAR(11),
+	`country_code` CHAR(2), -- eg. TR, EN...
 	FOREIGN KEY (`passaport_ID`) REFERENCES `passengers`(`customer_no`) ON DELETE CASCADE,
 	PRIMARY KEY (`passaport_ID`)
 );
 
 CREATE TABLE IF NOT EXISTS `turkish_entry` (
-	`turkish_ID` VARCHAR(11) NOT NULL,
+	`turkish_ID` VARCHAR(11),
 	FOREIGN KEY (`turkish_ID`) REFERENCES `passengers`(`customer_no`) ON DELETE CASCADE,
 	PRIMARY KEY (`turkish_ID`)
 );

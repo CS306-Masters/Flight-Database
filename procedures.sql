@@ -120,9 +120,23 @@ BEGIN
 	CREATE TEMPORARY TABLE IF NOT EXISTS PFF AS (SELECT PF.name, PF.customer_no, flights.flight_number, flights.departure_time, flights.destination,flights.departure FROM PF, flights WHERE PF.flight_number = flights.flight_number);
 	SELECT * FROM PFF WHERE PFF.customer_no = cid AND PFF.flight_number = fid;
 END $$
+
+-- This procedure is to list the passengers filtered with given flight number
+DROP PROCEDURE IF EXISTS listPassByFlight $$
+
+CREATE PROCEDURE listPassByFlight (fid CHAR(7))
+	BEGIN
+	SELECT *
+	FROM flies, passengers
+	WHERE flies.flight_number = fid AND flies.customer_no = passengers.customer_no;
+END $$
+
 -- Bahadır Yurtkulu End
 
---Bengusu Oneri: Add new flight'i silelim, yerine şunu koyalım : ssn ini girdiğim employee yi istediğim runway e atamak
+-- Bengusu Oneri: Add new flight'i silelim, yerine şunu koyalım : ssn ini girdiğim employee yi istediğim runway e atamak
+
+DROP PROCEDURE IF EXISTS updateRunwayforEmployee $$
+
 CREATE PROCEDURE updateRunwayforEmployee ( assign_runway CHAR(5), employee_ssn INTEGER)
 BEGIN UPDATE `works_in` SET `ssn`= employee_ssn WHERE `airline_code` = ( SELECT `airline_code`
                                                                          FROM `airlines`
@@ -132,4 +146,4 @@ BEGIN UPDATE `works_in` SET `ssn`= employee_ssn WHERE `airline_code` = ( SELECT 
 															FROM `flights`
 															WHERE `runway` = assign_runway)));																														 
 END$$
---bitti bengusu. 
+-- bitti bengusu. 
