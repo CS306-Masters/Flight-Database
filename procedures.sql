@@ -103,16 +103,11 @@ DROP PROCEDURE IF EXISTS cancelFlightbyPassenger $$
 -- sorunsuz
 CREATE PROCEDURE cancelFlightbyPassenger(customerNoEntered VARCHAR(11), flightNumEntered CHAR(7))
 BEGIN
-
-DELETE FROM flies WHERE customer_no = customerNoEntered AND flight_number = flightNumEntered;
-
-COMMIT;
-
-DELETE FROM passengers
-WHERE passengers.customer_no NOT IN (SELECT customer_no FROM flies);
-
-COMMIT;
-
+	DELETE FROM flies WHERE customer_no = customerNoEntered AND flight_number = flightNumEntered;
+	COMMIT;
+	DELETE FROM passengers
+	WHERE passengers.customer_no NOT IN (SELECT customer_no FROM flies);
+	COMMIT;
 END $$
 
 -- sorunsuz
@@ -121,13 +116,9 @@ DROP PROCEDURE IF EXISTS viewFlightInfo $$
 -- and it shows name, customer no , flight no, dep time, destn, depr info.
 CREATE PROCEDURE viewFlightInfo(cid VARCHAR(11), fid CHAR(7))
 BEGIN
-
-CREATE TEMPORARY TABLE IF NOT EXISTS PF AS (SELECT passengers.name, passengers.customer_no, flies.flight_number FROM passengers, flies WHERE passengers.customer_no = flies.customer_no);
-
-CREATE TEMPORARY TABLE IF NOT EXISTS PFF AS (SELECT PF.name, PF.customer_no, flights.flight_number, flights.departure_time, flights.destination,flights.departure FROM PF, flights WHERE PF.flight_number = flights.flight_number);
-
-SELECT * FROM PFF WHERE PFF.customer_no = cid AND PFF.flight_number = fid;
-
+	CREATE TEMPORARY TABLE IF NOT EXISTS PF AS (SELECT passengers.name, passengers.customer_no, flies.flight_number FROM passengers, flies WHERE passengers.customer_no = flies.customer_no);
+	CREATE TEMPORARY TABLE IF NOT EXISTS PFF AS (SELECT PF.name, PF.customer_no, flights.flight_number, flights.departure_time, flights.destination,flights.departure FROM PF, flights WHERE PF.flight_number = flights.flight_number);
+	SELECT * FROM PFF WHERE PFF.customer_no = cid AND PFF.flight_number = fid;
 END $$
 -- Bahadır Yurtkulu End
 
