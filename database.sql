@@ -64,7 +64,6 @@ CREATE TABLE IF NOT EXISTS `works_in` (
 );
 
 CREATE TABLE IF NOT EXISTS `flies` (
-	`cost` INTEGER,
 	`customer_no` VARCHAR(11),
 	`flight_number` CHAR(7),
 	FOREIGN KEY (`flight_number`) REFERENCES flights(`flight_number`) ON DELETE NO ACTION,

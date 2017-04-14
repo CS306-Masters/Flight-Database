@@ -17,12 +17,12 @@ END $$
 -- Kullanıcı girmez listeden uçuş seçer.
 DROP PROCEDURE IF EXISTS buyTicket $$
 
-CREATE PROCEDURE buyTicket(class CHAR(11), name CHAR(20), customer_no VARCHAR(11), age INT, isFemale BOOLEAN, cost INT, flight_number CHAR(7))
+CREATE PROCEDURE buyTicket(class CHAR(11), name CHAR(20), customer_no VARCHAR(11), age INT, isFemale BOOLEAN, flight_number CHAR(7))
 BEGIN
 	INSERT INTO `passengers`(`class`, `name`, `customer_no`, `age`, `isFemale`)
 		VALUES (class, name, customer_no, age, isFemale);
-	INSERT INTO `flies`(`cost`, `customer_no`, `flight_number`)
-		VALUES (cost, customer_no, flight_number);
+	INSERT INTO `flies`(`customer_no`, `flight_number`)
+		VALUES (customer_no, flight_number);
 END $$ 
 
 DROP PROCEDURE IF EXISTS newAirline $$
