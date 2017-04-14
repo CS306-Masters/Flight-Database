@@ -15,9 +15,9 @@ END $$
 -- Öyle bir uçuş olmadığından hata veriyor.
 -- Belki internet sitesini yaparken scroll list ile yapabiliriz. 
 -- Kullanıcı girmez listeden uçuş seçer.
-DROP PROCEDURE IF EXISTS buyTicket $$
+DROP PROCEDURE IF EXISTS addPassenger $$
 
-CREATE PROCEDURE buyTicket(class CHAR(11), name CHAR(20), customer_no VARCHAR(11), age INT, isFemale BOOLEAN, flight_number CHAR(7))
+CREATE PROCEDURE addPassenger(class CHAR(11), name CHAR(20), customer_no VARCHAR(11), age INT, isFemale BOOLEAN, flight_number CHAR(7))
 BEGIN
 	INSERT INTO `passengers`(`class`, `name`, `customer_no`, `age`, `isFemale`)
 		VALUES (class, name, customer_no, age, isFemale);
@@ -98,10 +98,10 @@ BEGIN
 END $$
 -- berkyaglioglu end
 
-DROP PROCEDURE IF EXISTS cancelFlightbyPassenger $$
+DROP PROCEDURE IF EXISTS removePassenger $$
 -- Bahadır Yurtkulu Begin
 -- sorunsuz
-CREATE PROCEDURE cancelFlightbyPassenger(customerNoEntered VARCHAR(11), flightNumEntered CHAR(7))
+CREATE PROCEDURE removePassenger(customerNoEntered VARCHAR(11), flightNumEntered CHAR(7))
 BEGIN
 	DELETE FROM flies WHERE customer_no = customerNoEntered AND flight_number = flightNumEntered;
 	COMMIT;
