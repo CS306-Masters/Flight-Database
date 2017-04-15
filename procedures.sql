@@ -32,6 +32,22 @@ BEGIN
 	INSERT INTO `airlines`(`airline_code`, `airline_name`)
 		VALUES (airline_code, airline_name);
 END $$
+
+-- Utility procedures to restrict query access to the back-end
+-- MARK: BEGIN
+CREATE PROCEDURE retrieveEmployee()
+BEGIN
+	SELECT *
+	FROM `Employees`;
+END $$
+
+CREATE PROCEDURE retrieveRunways()
+BEGIN
+	SELECT DISTINCT `runway`
+	FROM `Flights`;
+END $$
+
+-- MARK: END
 -- ORAN CAN END
 -- bngszcn
 
