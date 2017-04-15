@@ -13,7 +13,3 @@ DROP PROCEDURE IF EXISTS removePassenger;
 DROP PROCEDURE IF EXISTS viewFlightInfo;
 DROP PROCEDURE IF EXISTS updateRunwayforEmployee;
 DROP PROCEDURE IF EXISTS listPassByFlight;
-<<<<<<< HEAD
-DROP PROCEDURE IF EXISTS countRunway;
-=======
->>>>>>> origin/master
