@@ -66,8 +66,9 @@ BEGIN
         UPDATE `flights` SET `plane_model` = planeModel WHERE `flight_number` = num;
 END $$
 -- bngszcn
-DROP PROCEDURE IF EXISTS addHourlyEmployee $$
 -- berkyaglioglu
+DROP PROCEDURE IF EXISTS addHourlyEmployee $$
+
 CREATE PROCEDURE addHourlyEmployee(`since` DATE, `airline_code` CHAR(4), `ssn` INTEGER, `name` CHAR(20), `service_type` CHAR(20), `hourly_wages` INTEGER, `hours_worked` INTEGER)
 BEGIN
 	INSERT INTO `works_in`(`since`, `airline_code`, `ssn`)
@@ -96,6 +97,16 @@ CREATE PROCEDURE removingEmployee(ssn INTEGER)
 BEGIN
 	DELETE FROM employees WHERE employees.ssn = ssn;
 END $$
+
+DROP PROCEDURE IF EXISTS cancelFlightByAdmin $$
+
+CREATE PROCEDURE cancelFlightByAdmin(ssn INTEGER, flight_ID CHAR(7))
+BEGIN
+ 	DELETE FROM flights WHERE EXISTS 
+	(SELECT * FROM belongs b, employees e, works_in w WHERE ssn = w.ssn AND w.airline_code = b.airline_code AND b.flight_number = flight_ID)
+	AND flights.flight_number = flight_ID;
+END $$
+
 -- berkyaglioglu end
 
 DROP PROCEDURE IF EXISTS removePassenger $$
