@@ -102,7 +102,7 @@ DROP PROCEDURE IF EXISTS cancelFlightByAdmin $$
 
 CREATE PROCEDURE cancelFlightByAdmin(ssn INTEGER, flight_ID CHAR(7))
 BEGIN
- 	DELETE FROM flights WHERE EXISTS 
+ 	UPDATE flights SET flights.is_canceled = TRUE WHERE EXISTS 
 	(SELECT * FROM belongs b, employees e, works_in w WHERE ssn = w.ssn AND w.airline_code = b.airline_code AND b.flight_number = flight_ID)
 	AND flights.flight_number = flight_ID;
 END $$
