@@ -157,4 +157,15 @@ BEGIN UPDATE `works_in` SET `ssn`= employee_ssn WHERE `airline_code` = ( SELECT 
 															FROM `flights`
 															WHERE `runway` = assign_runway)));																														 
 END$$
+
+DROP PROCEDURE IF EXISTS countRunway;
+
+CREATE PROCEDURE countRunway()
+BEGIN
+	SELECT runway, COUNT(*)
+	FROM flights
+	GROUP by runway;
+END $$
+
+
 -- bitti bengusu. 
