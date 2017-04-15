@@ -1,5 +1,6 @@
 # Flight-Database
 <h2>A flights database project</h2>
-<h3>Project Members</h3> Oran Can Oren, Bahadir Yurtkulu, Bengusu Ozcan, Berk Yaglioglu
+<h3>Project Members</h3> 
+<p>Oran Can Oren, Bahadir Yurtkulu, Bengusu Ozcan, Berk Yaglioglu</p>
 <hr />
-![alt tag](https://github.com/CS306-Masters/Flight-Database/blob/master/relational_schema.png)
+<img src="./relational_schema.png" />
