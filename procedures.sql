@@ -52,13 +52,6 @@ BEGIN
 	 
 END $$
 
-DROP PROCEDURE IF EXISTS cancelFlight $$
-
-CREATE PROCEDURE cancelFlight(num CHAR(7), cancel BOOLEAN)
-BEGIN
-        UPDATE `flights` SET `is_canceled` = cancel WHERE `flight_number` = num;
-END $$
-
 DROP PROCEDURE IF EXISTS changePlaneModel $$
 
 CREATE PROCEDURE changePlaneModel(num CHAR(7), planeModel CHAR(20))
