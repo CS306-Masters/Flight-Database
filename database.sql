@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `flights` (
 	`plane_model` CHAR(20),
 	`tail_number` CHAR(6),
 	`gate/park` CHAR(5),
-	`departure_time` TIMESTAMP,
+	`departure/arrivalTime` TIMESTAMP,
 	`isDomestic` BOOLEAN,
 	`destination` CHAR(3),
 	`departure` CHAR(3),
