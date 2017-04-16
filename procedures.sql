@@ -54,13 +54,13 @@ END $$
 DROP PROCEDURE IF EXISTS addNewFlight $$
 
 CREATE PROCEDURE addNewFlight( flightNumber CHAR(7), planeModel CHAR(20), tailNumber CHAR(6), gate_park CHAR(5), 
-departure/arrivalTime TIMESTAMP, is_domestic BOOLEAN, flightDestination CHAR(3), flightDeparture CHAR(3), flightRunway CHAR(5), 
+departure_arrivalTime TIMESTAMP, is_domestic BOOLEAN, flightDestination CHAR(3), flightDeparture CHAR(3), flightRunway CHAR(5), 
 airlineCode CHAR(4))
 
 BEGIN
      INSERT INTO `flights` (`flight_number`,`plane_model`,`tail_number`, `gate/park`,`departure/arrivalTime`,`isDomestic`, `destination`,`departure`,`runway`)
 	 
-     VALUES (flightNumber, planeModel, tailNumber, gate_park, departure/arrivalTime, is_domestic, flightDestination, flightDeparture, flightRunway)	;
+     VALUES (flightNumber, planeModel, tailNumber, gate_park, departure_arrivalTime, is_domestic, flightDestination, flightDeparture, flightRunway)	;
      
 	 INSERT INTO `belongs` (`airline_code`, `flight_number`)
 
@@ -137,7 +137,7 @@ DROP PROCEDURE IF EXISTS viewFlightInfo $$
 CREATE PROCEDURE viewFlightInfo(cid VARCHAR(11), fid CHAR(7))
 BEGIN
 	CREATE TEMPORARY TABLE IF NOT EXISTS PF AS (SELECT passengers.name, passengers.customer_no, flies.flight_number FROM passengers, flies WHERE passengers.customer_no = flies.customer_no);
-	CREATE TEMPORARY TABLE IF NOT EXISTS PFF AS (SELECT PF.name, PF.customer_no, flights.flight_number, flights.departure/arrivalTime, flights.destination,flights.departure FROM PF, flights WHERE PF.flight_number = flights.flight_number);
+	CREATE TEMPORARY TABLE IF NOT EXISTS PFF AS (SELECT PF.name, PF.customer_no, flights.flight_number, flights.`departure/arrivalTime`, flights.destination,flights.departure FROM PF, flights WHERE PF.flight_number = flights.flight_number);
 	SELECT * FROM PFF WHERE PFF.customer_no = cid AND PFF.flight_number = fid;
 END $$
 
@@ -167,7 +167,7 @@ BEGIN UPDATE `works_in` SET `ssn`= employee_ssn WHERE `airline_code` = ( SELECT 
 															WHERE `runway` = assign_runway)));																														 
 END$$
 
-DROP PROCEDURE IF EXISTS countRunway;
+DROP PROCEDURE IF EXISTS countRunway$$
 
 CREATE PROCEDURE countRunway()
 BEGIN
