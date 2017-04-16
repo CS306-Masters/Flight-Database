@@ -6,7 +6,7 @@ DELIMITER $$
 -- Flight number kısmını scroll list şeklinde yapalım.
 DROP PROCEDURE IF EXISTS departureTimeUpdate $$
 
-CREATE PROCEDURE departureTimeUpdate(t TIMESTAMP, num CHAR(7))
+CREATE PROCEDURE flightTimeUpdate(t TIMESTAMP, num CHAR(7))
 BEGIN
  	UPDATE `flights` SET `departure/arrivalTime` = t WHERE `flight_number` = num;
 END $$
