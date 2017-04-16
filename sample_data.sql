@@ -8,7 +8,7 @@ INSERT INTO `airlines`(`airline_code`, `airline_name`) -- Official IATA codes us
 			('PC', 'Pegasus Airlines');
 
 
-INSERT INTO `flights`(`flight_number`, `plane_model`, `tail_number`, `gate/park`, `departure_time`, `isDomestic`, `departure`, `destination`, `runway`)
+INSERT INTO `flights`(`flight_number`, `plane_model`, `tail_number`, `gate/park`, `departure/arrivalTime`, `isDomestic`, `departure`, `destination`, `runway`)
 	VALUES  ('PC4122', 'BOEING 737-82R', 'TCAAO', '313B', '2017-03-19 18:15:00', TRUE, 'SAW', 'ADB', '06/24'),
 			('TK7286', 'BOEING 737-8F2', 'TCSCL', '309B', '2017-03-19 19:10:00', TRUE, 'SAW', 'KYA', '03/17'),
 			('QR242', 'AIRBUS A321', 'A7-ADS', '201A', '2017-03-19 21:15:00', FALSE, 'SAW', 'DOH', '12/34'),
