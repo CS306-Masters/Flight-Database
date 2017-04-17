@@ -1,4 +1,3 @@
--- ORAN CAN
 DELIMITER ;
 DELIMITER $$
 
