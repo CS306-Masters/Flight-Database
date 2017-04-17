@@ -118,10 +118,10 @@ END $$
 
 -- berkyaglioglu end
 
-DROP PROCEDURE IF EXISTS removePassenger $$
+DROP PROCEDURE IF EXISTS removeFlight $$
 -- Bahadır Yurtkulu Begin
 -- sorunsuz
-CREATE PROCEDURE removePassenger(customerNoEntered VARCHAR(11), flightNumEntered CHAR(7))
+CREATE PROCEDURE removeFlight(customerNoEntered VARCHAR(11), flightNumEntered CHAR(7))
 BEGIN
 	DELETE FROM flies WHERE customer_no = customerNoEntered AND flight_number = flightNumEntered;
 	COMMIT;
