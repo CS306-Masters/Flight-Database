@@ -38,7 +38,7 @@ BEGIN
 	SELECT * FROM PFF WHERE PFF.customer_no = cid AND PFF.flight_number = fid;
 END $$
 
-DROP PROCEDURE IF EXISTS departureTimeUpdate $$
+DROP PROCEDURE IF EXISTS flightTimeUpdate $$
 
 CREATE PROCEDURE flightTimeUpdate(t TIMESTAMP, num CHAR(7))
 BEGIN
