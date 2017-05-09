@@ -102,6 +102,9 @@ DROP PROCEDURE IF EXISTS removingEmployee $$
 CREATE PROCEDURE removingEmployee(ssn INTEGER)
 BEGIN
 	DELETE FROM employees WHERE employees.ssn = ssn;
+	DELETE FROM works_in WHERE works_in.ssn = ssn;
+	DELETE FROM conracted WHERE contracted.ssn = ssn;
+	DELETE FROM hourly WHERE hourly.ssn = ssn;
 END $$
 
 DROP PROCEDURE IF EXISTS updateRunwayforEmployee $$
