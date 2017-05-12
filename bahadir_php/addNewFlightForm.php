@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-
 <form method="post" action="addNewFlight.php">
 	Flight Number: <input type="text" name="flightNumber"><br>
 	Plane Model: <input type="text" name="planeModel"><br>
@@ -15,6 +14,5 @@
 	Flight Runway: <input type="text" name="flightRunway"><br>
 	Airline Code: <input type="text" name="airlineCode"><br>
 	<input type="submit" value="Add Flight">
-
 </body>
 </html>
