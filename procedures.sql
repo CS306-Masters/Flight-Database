@@ -107,18 +107,6 @@ BEGIN
 	DELETE FROM hourly WHERE hourly.employee_ssn = ssn;
 END $$
 
-DROP PROCEDURE IF EXISTS updateRunwayforEmployee $$
-
-CREATE PROCEDURE updateRunwayforEmployee ( assign_runway CHAR(5), employee_ssn INTEGER)
-BEGIN UPDATE `works_in` SET `ssn`= employee_ssn WHERE `airline_code` = ( SELECT `airline_code`
-                                                                         FROM `airlines`
-								         WHERE `airline_name` = (SELECT `airline_name`
-												 FROM `belongs`
-												WHERE `flight_number` = (SELECT `flight_number`
-															FROM `flights`
-															WHERE `runway` = assign_runway)));																														 
-END$$
-
 CREATE PROCEDURE retrieveEmployee()
 BEGIN
 	SELECT *
