@@ -89,10 +89,10 @@ DROP PROCEDURE IF EXISTS addContractedEmployee $$
 
 CREATE PROCEDURE addContractedEmployee(`since` DATE, `airline_code` CHAR(4), `ssn` INTEGER, `name` CHAR(20), `service_type` CHAR(20), `contract_ID` INTEGER)
 BEGIN
-	INSERT INTO `works_in`(`since`, `airline_code`, `ssn`)
-	VALUES (since, airline_code, ssn);
 	INSERT INTO `employees`(`ssn`, `name`, `service_type`)
 	VALUES (ssn, name, service_type);
+	INSERT INTO `works_in`(`since`, `airline_code`, `ssn`)
+	VALUES (since, airline_code, ssn);
 	INSERT INTO `contracted`(`contract_ID`, `employee_ssn`)
 	VALUES (contract_ID, ssn);
 END $$
