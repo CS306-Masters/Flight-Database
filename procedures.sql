@@ -127,3 +127,33 @@ BEGIN
 	FROM flies, passengers
 	WHERE flies.flight_number = fid AND flies.customer_no = passengers.customer_no;
 END $$
+
+-- below belongs to bengusu, geri durun.
+
+CREATE PROCEDURE addNewFlight( flightNumber CHAR(7), planeModel CHAR(20), tailNumber CHAR(6), gate_park CHAR(5), 
+departureTime TIMESTAMP, is_domestic BOOLEAN, flightDestination CHAR(3), flightDeparture CHAR(3), flightRunway CHAR(5), 
+airlineCode CHAR(4))
+
+BEGIN
+     INSERT INTO `flights` (`flight_number`,`plane_model`,`tail_number`, `gate/park`,`departure_time`,`isDomestic`, `destination`,`departure`,`runway`)
+	 
+     VALUES (flightNumber, planeModel, tailNumber, gate_park, departureTime, is_domestic, flightDestination, flightDeparture, flightRunway)	;
+     
+	 INSERT INTO `belongs` (`airline_code`, `flight_number`)
+
+	 VALUES (airlineCode, flightNumber);
+	 
+END $$
+
+
+CREATE PROCEDURE cancelFlight(num CHAR(7), cancel BOOLEAN)
+BEGIN
+        UPDATE `flights` SET `is_canceled` = cancel WHERE `flight_number` = num;
+END $$
+
+CREATE PROCEDURE changePlaneModel(num CHAR(7), planeModel CHAR(20))
+BEGIN
+        UPDATE `flights` SET `plane_model` = planeModel WHERE `flight_number` = num;
+END $$
+
+--above belongs to bengusu, geri durun.
