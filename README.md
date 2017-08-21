@@ -3,5 +3,7 @@
 <h4>Project Members</h4> 
 <p>Oran Can Oren, Bahadir Yurtkulu, Bengusu Ozcan, Berk Yaglioglu</p>
 <hr />
-<img src="./WebApp_Visual.png" width="318.75" height="178.5" />
-<img src="./relational_schema.png" width="191.25" height="162.125" />
+<center>
+<img src="./WebApp_Visual.png" width="637.5" height="357" />
+<img src="./relational_schema.png" width="573.75" height="486.75" />
+</center>
