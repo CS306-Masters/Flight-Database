@@ -1,0 +1,15 @@
+#navTitle {
+  font-weight: 100;
+}
+
+#mainContainer {
+  padding-top: 30px;
+}
+
+.parallax-container {
+  height: 300px;
+}
+
+#greeting {
+  font-weight: 300;
+}

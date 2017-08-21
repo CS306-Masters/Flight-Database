@@ -1,0 +1,172 @@
+<html>
+<head>
+  <title>Flight Actions</title>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css"  media="screen,projection">
+  <!--Let browser know website is optimized for mobile-->
+  <link type="text/css" rel="stylesheet" href="../../css/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../../js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.collapsible').collapsible();
+  });
+  </script>
+  <!-- navbar -->
+  <header>
+    <nav class="z-depth-2 grey darken-4" id="navbar">
+      <div class="nav-wrapper container">
+          <a class="container brand-logo white-text" id="navTitle" href="../../index.html">Airport DBMS | Flight Actions</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container" style="margin-top: 50px">
+      <h4 class="header center">Pick an action below</h4>
+      <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Add New Flight</div>
+          <div class="collapsible-body">
+            <form method="post" action="addNewFlight.php">
+              <div class="row">
+                <div class="col s4">
+                  <label>Flight Number:</label><input type="text" name="flightNumber" placeholder="TK2832">
+                </div>
+                <div class="col s4">
+                  <label>Plane Model:</label><input type="text" name="planeModel" placeholder="BOEING 737-82R">
+                </div>
+                <div class="col s4">
+                  <label>Tail Number:</label><input type="text" name="tailNumber" placeholder="TCAAO">
+                </div>
+                <div class="col s4">
+                  <label>Parking Gate:</label><input type="text" name="gate_park" placeholder="302A">
+                </div>
+                <div class="col s4">
+                  <label>Departure or Arrival Time:</label><input type="text" name="departure_arrivalTime" placeholder="YYYY-MM-DD HH:MM:SS">
+                </div>
+                <div class="col s4">
+                  <label>Flight is Domestic?</label><br />
+                  <input type="radio" name="is_domestic" id="yes" value="yes"/>
+                  <label for="yes">Yes</label><br />
+                  <input type="radio" name="is_domestic" id="no" value="no"/>
+                  <label for="no">No</label>
+                </div>
+                <div class="col s4">
+                  <label>Flight Destination:</label><input type="text" name="flightDestination" placeholder="ADB">
+                </div>
+                <div class="col s4">
+                  <label>Flight Departure:</label><input type="text" name="flightDeparture" placeholder="SAW">
+                </div>
+                <div class="col s4">
+                  <label>Flight Runway:</label><input type="text" name="flightRunway" placeholder="06/24">
+                </div>
+                <div class="col s4">
+                  <label>Airline Code:</label><input type="text" name="airlineCode" placeholder="TK">
+                </div>
+                <div class="col s12 center">
+                  <button class="right waves-effect waves-light btn hoverable" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">place</i>Cancel a Flight [Passenger]</div>
+          <div class="collapsible-body">
+            <form method="post" action="removeFlight.php">
+              <div class="row">
+                <div class="col s6">
+                  <label>Customer No:</label><input type="text" name="customerNumber">
+                </div>
+                <div class="col s6">
+                  <label>Flight Number:</label><input type="text" name="flightNumber">
+                </div>
+                <div class="col s12">
+                  <button class="right waves-effect waves-light btn hoverable" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">place</i>Count Runways</div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div class="s12 center">
+                <h5>Count Runways</h5>
+                <a class="center waves-effect waves-light btn hoverable" href="./countRunway.php">Count Runways<i class="material-icons right">send</i></a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">place</i>Flight Time Update</div>
+          <div class="collapsible-body">
+            <div class="row">
+              <form method="post" action="flightTimeUpdate.php">
+                <div class="row">
+                  <div class="col s6">
+                    	<label>Flight Number:</label><input type="text" name="flightNumber">
+                  </div>
+                  <div class="col s6">
+                    <label>New Time:</label><input type="text" name="newTime" placeholder="YYYY-MM-DD HH:MM:SS">
+                  </div>
+                  <div class="col s12">
+                    <button class="right waves-effect waves-light btn hoverable" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">place</i>Cancel a Flight [admin]</div>
+          <div class="collapsible-body">
+            <form action="postCancelFlightByAdminForm.php" method="post">
+            <div class="row">
+              <div class="col s6">
+                <label>Your SSN:</label><input name="ssn">
+              </div>
+              <div class="col s6">
+                <label>Flight ID: </label><input name="flight_id">
+              </div>
+              <div class="col s12">
+                <button class="right waves-effect waves-light btn hoverable" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+              </div>
+            </div>
+          </form>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">place</i>List Passengers By Flight</div>
+          <div class="collapsible-body">
+            <div class="row">
+              <form action="listPassengersbyFlight.php" method="post">
+              <div class="col s4">
+                <label>Flight Number :</label><input type="text" name="fid" >
+              </div>
+              <div class="col s8 center">
+                <button class="waves-effect waves-light btn hoverable" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </main>
+  <script>
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+  </script>
+</body>
+</head>
+</html>

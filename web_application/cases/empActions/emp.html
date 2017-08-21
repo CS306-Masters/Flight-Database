@@ -1,0 +1,133 @@
+<html>
+<head>
+  <title>Airport DBMS | Home</title>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css"  media="screen,projection">
+  <!--Let browser know website is optimized for mobile-->
+  <link type="text/css" rel="stylesheet" href="../../css/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../../js/materialize.min.js"></script>
+  <!-- navbar -->
+  <header>
+    <nav class="z-depth-2 grey darken-4" id="navbar">
+      <div class="nav-wrapper container">
+          <a class="container brand-logo white-text" id="navTitle" href="../../index.html">Airport DBMS | Employee</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container" style="margin-top: 50px">
+      <h4 class="header center">Pick an action below</h4>
+      <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Add Contracted Employee</div>
+          <div class="collapsible-body">
+            <form action="postAddContractedEmployeeForm.php" method="post">
+              <div class="row">
+                <div class="col s4">
+                  <label> Employee's SSN: </label><input name="ssn">
+                </div>
+                <div class="col s4">
+                  <label> Employee's Name: </label><input name="name">
+                </div>
+                <div class="col s4">
+                  <label> Airline's Code: </label><input name="airline_code">
+                </div>
+                <div class="col s4">
+                  <label> Start Date: </label><input type="date" name="sdate" class="datepicker">
+                </div>
+                <div class="input-field col s4">
+                  <select name="service_type">
+                    <option>Choose one</option>
+                    <option value="cabin cleaning">cabin cleaning</option>
+                    <option value="baggage transport">baggage transport</option>
+                    <option value="counter security">counter security</option>
+                  </select>
+                  <label>Service Type:</label>
+                </div>
+                <div class="col s4">
+                  <label> Contract ID: </label><input name="contract_id">
+                </div>
+              </div>
+              <div class="col s12 center">
+                <button class="waves-effect waves-light btn hoverable" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+              </div>
+            </form>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Remove Employee</div>
+          <div class="collapsible-body">
+            <form action="postRemovingEmployeeForm.php" method="post">
+            <div class="row">
+              <div class="col s6">
+                <label> Employee's SSN: </label><input name="ssn"><br>
+              </div>
+              <div class="col s6">
+                <button class="right waves-effect waves-light btn hoverable" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+              </div>
+            </div>
+            </form>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Add Hourly Employee</div>
+          <div class="collapsible-body">
+            <form action="postAddHourlyEmployeeForm.php" method="post">
+            <div class="row">
+              <div class="col s4">
+                <label> Employee's SSN: </label><input name="ssn">
+              </div>
+              <div class="col s4">
+                <label> Employee's Name: </label><input name="name">
+              </div>
+              <div class="col s4">
+                <label> Airline's Code: </label><input name="airline_code">
+              </div>
+              <div class="col s4">
+                <label> Start Date: </label><input type="date" name="sdate" class="datepicker">
+              </div>
+              <div class="input-field col s4">
+                <select name="service_type">
+                  <option>Choose one</option>
+                  <option value="cabin cleaning">cabin cleaning</option>
+                  <option value="baggage transport">baggage transport</option>
+                  <option value="counter security">counter security</option>
+                </select>
+                <label>Service Type:</label>
+              </div>
+              <div class="col s4">
+                <label> Hourly Wages: </label><input name="hourly_wages">
+              </div>
+              <div class="col s6">
+                <label> Hours Worked: </label><input name="hours_worked">
+              </div>
+              <div class="col s6">
+                <button class="right waves-effect waves-light btn hoverable" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </main>
+  <script>
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year
+    format: 'yyyy-mm-dd'
+  });
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+  </script>
+</body>
+</head>
+</html>
